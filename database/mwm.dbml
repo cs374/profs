@@ -1,0 +1,148 @@
+
+Table "MADISTEM" {
+  "Year" INT [pk, not null, note: 'The event year']
+  "Date" DATE [note: 'The exact date of the event']
+  Note: 'Holds the year and exact date of each event, for organizing.  More attributes to be added - guest speaker, theme, etc.'
+}
+
+Table "ROOM" {
+  "ID" VARCHAR(32) [pk, not null, note: 'The short name of the room, like King250']
+  "Building" VARCHAR(45)
+  "RoomNum" VARCHAR(45)
+  "Capacity" INT
+  Note: 'Rooms on campus that may be used by madistem'
+}
+
+Table "WORKSHOP" {
+  "ID" INT [pk, not null, increment, note: 'Generated auto-increment ID because the title may be edited over time.  This ID is unique across years.']
+  "State" VARCHAR(45) [note: 'The state of the workshop - proposed, accepted, file, etc. - the exact states are not fully defined.']
+  "Title" VARCHAR(128)
+  "Advertisement" VARCHAR(512) [note: 'The workshop description to be shown on the website.']
+  "Description" VARCHAR(1024) [note: 'The full description of the workshop maybe with much more detail than the advertisement.']
+  "Capacity" INT [note: 'The max number of students that can be accomodated in this workshop']
+  "ComputerNeeds" VARCHAR(128)
+  "RoomNeeds" VARCHAR(128)
+  "MaxRepeat" INT [note: 'The number of times this workshop can be offered during the day']
+  "ParentQuestions" VARCHAR(1024) [note: 'Follow-up information/questions for the attendee to share with their parents post event.']
+  "OtherInformation" VARCHAR(512) [note: 'Any other information about the workshop to be shared with the organizers.']
+  "MADISTEM_Year" INT [not null, note: 'Not part of the key, but required.']
+  "ROOM_ID" VARCHAR(32) [note: 'The room is assigned later in the process, so it can be null.']
+
+  Note: 'Holds all the workshop information.'
+}
+
+Table "COLLEGE" {
+  "Code" VARCHAR(8) [pk, not null]
+  "Name" VARCHAR(45) [not null]
+  "DeanFullName" VARCHAR(45)
+  "DeanEmail" VARCHAR(45)
+  "DeanFirstName" VARCHAR(45)
+  Note: 'Needed for name lookups and for thank-you emails'
+}
+
+Table "DEPARTMENT" {
+  "Code" VARCHAR(8) [pk, not null, note: 'JMU department code']
+  "Name" VARCHAR(45) [not null]
+  "AUHEmail" VARCHAR(45)
+  "AUHFullName" VARCHAR(45)
+  "COLLEGE_Code" VARCHAR(8) [not null]
+
+  Note: 'Needed for name lookup and thank-you emails'
+}
+
+Table "PERSON" {
+  "Email" VARCHAR(45) [pk, not null, note: 'Use email as the unique identifier for all people.']
+  "Type" VARCHAR(45) [note: 'student, faculty, other']
+  "FirstName" VARCHAR(45) [not null]
+  "LastName" VARCHAR(45) [not null]
+  "DEPARTMENT_Code" VARCHAR(8)
+
+  Note: 'The super class entity for all different types of people, with their basic information.'
+}
+
+Table "ROOM_FEATURE" {
+  "Name" INT [pk, not null]
+  "Description" VARCHAR(45)
+  Note: 'Just to lookup some features like sink, computers, projector, etc.'
+}
+
+Table "ROOM_has_ROOM_FEATURE" {
+  "ROOM_ID" VARCHAR(32) [not null]
+  "ROOM_FEATURE_Name" INT [not null]
+
+  Note: 'M-N connection between room and room features'
+}
+
+Table "VOLUNTEER" {
+  "PERSON_Email" VARCHAR(45) [not null]
+  "AssignedRole" VARCHAR(45) [note: 'Various volunteer roles - need to consult Dr. Lam for details.  This is possibly multi-valued and could be promoted to part of the key.']
+  "MADISTEM_Year" INT [not null, note: 'Part of the key in case the same person works in different roles in different years.']
+
+  Note: 'Event volunteers are managed separately from other workshop personnel, but they can be assigned to work in workshops.  These are the people usually managed by Dr.  Lam.  The madiSTEM year is part of the key as the same person may work as a volunteer in different years in different roles.'
+}
+
+Table "PERSON_WORKSHOP" {
+  "PERSON_Email" VARCHAR(45) [not null]
+  "WORKSHOP_ID" INT [not null]
+  "Role" VARCHAR(45)
+  "Phone" VARCHAR(10)
+
+  Note: 'Connects a person to a workshop with a specific role and contact phone number.  Since the year is in the workshop table, this relationship is M-N.'
+}
+
+Table "ORGANIZER" {
+  "PERSON_Email" VARCHAR(45) [not null]
+  "Role" VARCHAR(45)
+  "MADISTEM_Year" INT [not null]
+
+  Note: 'This table just tracks the madistem organizers and roles by year (like an M-N with event)'
+}
+
+Table "SCHEDULE_SLOT" {
+  "ID" INT [not null, note: 'The slots are numbered 1 - N from earliest to latest']
+  "Name" VARCHAR(45) [note: 'What is this slot? registration, lunch, speaker, workshops']
+  "From" TIME [note: 'The starting time of this time block']
+  "To" TIME [note: 'end time of this slot']
+  "MADISTEM_Year" INT [not null]
+
+  Note: 'An event is divided into a schedule for the day - these are the time slots.'
+}
+
+Table "WORKSHOP_in_SCHEDULE_SLOT" {
+  "WORKSHOP_ID" INT [not null]
+  "SCHEDULE_SLOT_ID" INT [not null]
+  "SCHEDULE_SLOT_MADISTEM_Year" INT [not null]
+
+  Note: 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.'
+}
+
+Ref "fk_WORKSHOP_MADISTEM1":"MADISTEM"."Year" < "WORKSHOP"."MADISTEM_Year" [update: no action, delete: no action]
+
+Ref "fk_WORKSHOP_ROOM1":"ROOM"."ID" < "WORKSHOP"."ROOM_ID" [update: no action, delete: no action]
+
+Ref "fk_DEPARTMENT_COLLEGE":"COLLEGE"."Code" < "DEPARTMENT"."COLLEGE_Code" [update: no action, delete: no action]
+
+Ref "fk_PERSON_DEPARTMENT1":"DEPARTMENT"."Code" < "PERSON"."DEPARTMENT_Code" [update: no action, delete: no action]
+
+Ref "fk_ROOM_has_ROOM_FEATURE_ROOM1":"ROOM"."ID" < "ROOM_has_ROOM_FEATURE"."ROOM_ID" [update: no action, delete: no action]
+
+Ref "fk_ROOM_has_ROOM_FEATURE_ROOM_FEATURE1":"ROOM_FEATURE"."Name" < "ROOM_has_ROOM_FEATURE"."ROOM_FEATURE_Name" [update: no action, delete: no action]
+
+Ref "fk_VOLUNTEER_PERSON1":"PERSON"."Email" < "VOLUNTEER"."PERSON_Email" [update: no action, delete: no action]
+
+Ref "fk_VOLUNTEER_MADISTEM1":"MADISTEM"."Year" < "VOLUNTEER"."MADISTEM_Year" [update: no action, delete: no action]
+
+Ref "fk_PERSON_has_WORKSHOP_PERSON1":"PERSON"."Email" < "PERSON_WORKSHOP"."PERSON_Email" [update: no action, delete: no action]
+
+Ref "fk_PERSON_has_WORKSHOP_WORKSHOP1":"WORKSHOP"."ID" < "PERSON_WORKSHOP"."WORKSHOP_ID" [update: no action, delete: no action]
+
+Ref "fk_ORGANIZER_PERSON1":"PERSON"."Email" < "ORGANIZER"."PERSON_Email" [update: no action, delete: no action]
+
+Ref "fk_ORGANIZER_MADISTEM1":"MADISTEM"."Year" < "ORGANIZER"."MADISTEM_Year" [update: no action, delete: no action]
+
+Ref "fk_SCHEDULE_SLOT_MADISTEM1":"MADISTEM"."Year" < "SCHEDULE_SLOT"."MADISTEM_Year" [update: no action, delete: no action]
+
+Ref "fk_WORKSHOP_has_SCHEDULE_SLOT_WORKSHOP1":"WORKSHOP"."ID" < "WORKSHOP_in_SCHEDULE_SLOT"."WORKSHOP_ID" [update: no action, delete: no action]
+
+Ref "fk_WORKSHOP_has_SCHEDULE_SLOT_SCHEDULE_SLOT1":"SCHEDULE_SLOT".("ID", "MADISTEM_Year") < "WORKSHOP_in_SCHEDULE_SLOT".("SCHEDULE_SLOT_ID", "SCHEDULE_SLOT_MADISTEM_Year") [update: no action, delete: no action]
+
