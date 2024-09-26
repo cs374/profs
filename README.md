@@ -24,7 +24,7 @@ If after the design phase, the scope of this project is too small, we will focus
 | Person | contact information, t-shirt size, lunch preference, type (e.g., student, faculty, other), role (e.g. leader, co-leader, mentor, assistant, volunteer), etc. |
 | Room | location, size, capacity, equipment (e.g., computers, projectors, sink), etc. |
 
-madiSTEM has run for many years, and we have a lot of historial workshop data. One aspect that we might explore for this project involves loading previous workshop descriptions into a library that current workshop leaders may use as a starting point for their workshops. We can also incorporate student feedback about the workshops to track participant interest over time and make recommendations to the conference organizers. The system can help visualize this data and allow users to search for previous and current workshops by keyword or topic.
+madiSTEM has run for many years, and we have a lot of historical workshop data. One aspect that we might explore for this project involves loading previous workshop descriptions into a library that current workshop leaders may use as a starting point for their workshops. We can also incorporate student feedback about the workshops to track participant interest over time and make recommendations to the conference organizers. The system can help visualize this data and allow users to search for previous and current workshops by keyword or topic.
 
 # Primary System Users
 
@@ -32,7 +32,7 @@ madiSTEM has run for many years, and we have a lot of historial workshop data. O
 | :---- | :---- |
 | Organizers | Administrator access to the system with the permission to edit any data. These are faculty who help run the conference and recruit other faculty to participate. |
 | Workshop leaders | Can manage some of the data pertaining to their own workshop. For example, they can edit the title, description, or required materials (but not the room). |
-| Other workshop staff | Can manage their personal data, such as how their name should be spelled on their nametag, what times they are available to run the workshop, etc. |
+| Other workshop staff | Can manage their personal data, such as how their name should be spelled on their name tag, what times they are available to run the workshop, etc. |
 
 Currently all this information is sent over emails, sometimes at the last minute. We want to have a system where users can see their workshop information, make changes directly to the database (for their workshop only), see the assigned room number, and click a button to confirm the information is correct / ready to be published on the website. Having this database system will eliminate the need for dozens of emails and spreadsheets, simplify version control of the workshop data, and eliminate duplication of documents sent as email attachments.
 
@@ -40,19 +40,19 @@ Currently all this information is sent over emails, sometimes at the last minute
 
 ## People and Rooms
 
-* Room information is maintained in the system, but only a subset of rooms may be available for a single madiSTEM event.  
-* Organizer information may remain in the system across years, but specific people have specific roles per madiSTEM event.  
+* Room information is maintained in the system, but only a subset of rooms may be available for a single madiSTEM event.
+* Organizer information may remain in the system across years, but specific people have specific roles per madiSTEM event.
 * Volunteer information is kept per event, even if the same person serves as a volunteer multiple times.
 
 ## Workshop process
 
-* Workshops are *proposed* for an event year, but a workshop may start as a copy of a previous year’s version of the same workshop.  Proposers may update the workshop attributes.  
-* A slate of workshops are *selected* for the current year’s madiSTEM, and the proposers agree.  Updates after the selection/acceptance must be made by the organizers.  
-* Workshops are *assigned* to rooms based on their needs.  
-* Multiple occurrences of each workshop are *scheduled* to specific timeblocks and student attendee cohorts.  
-* Permanent and/or rotating volunteers are assigned to workshops.  
-* Workshops are *held* on the day of the event and evaluation data from the attendees is collected (on paper).  A scheduled workshop may not be held (in case of illness or other emergency).  
-* Survey data is collated and recorded for each workshop.  
+* Workshops are *proposed* for an event year, but a workshop may start as a copy of a previous year’s version of the same workshop.  Proposers may update the workshop attributes.
+* A slate of workshops are *selected* for the current year’s madiSTEM, and the proposers agree.  Updates after the selection/acceptance must be made by the organizers.
+* Workshops are *assigned* to rooms based on their needs.
+* Multiple occurrences of each workshop are *scheduled* to specific time blocks and student attendee cohorts.
+* Permanent and/or rotating volunteers are assigned to workshops.
+* Workshops are *held* on the day of the event and evaluation data from the attendees is collected (on paper).  A scheduled workshop may not be held (in case of illness or other emergency).
+* Survey data is collated and recorded for each workshop.
 * Thank you letters are sent out to all workshop personnel, to all volunteers, and to all organizers, and cc’d to their others, depending on the type and role of the person.
 
 # About the Team
