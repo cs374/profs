@@ -1,4 +1,4 @@
-# CS374 Database Project
+# CS374 Database Project Proposal
 
 Project Title: **madiSTEM Workshop Management (MWM)**
 
