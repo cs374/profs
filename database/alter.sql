@@ -18,9 +18,7 @@ ALTER TABLE "TimeSlot" ADD FOREIGN KEY ("Event_Year") REFERENCES "Event" ("Year"
 
 ALTER TABLE "Workshop_TimeSlot" ADD FOREIGN KEY ("Workshop_ID") REFERENCES "Workshop" ("ID");
 
-ALTER TABLE "Workshop_TimeSlot" ADD FOREIGN KEY ("TimeSlot_Event_Year") REFERENCES "TimeSlot" ("Event_Year");
-
-ALTER TABLE "Workshop_TimeSlot" ADD FOREIGN KEY ("TimeSlot_ID") REFERENCES "TimeSlot" ("ID");
+ALTER TABLE "Workshop_TimeSlot" ADD FOREIGN KEY ("TimeSlot_Event_Year", "TimeSlot_ID") REFERENCES "TimeSlot" ("Event_Year", "ID");
 
 ALTER TABLE "Room_Feature" ADD FOREIGN KEY ("Room_Name") REFERENCES "Room" ("Name");
 

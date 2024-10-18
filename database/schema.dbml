@@ -91,11 +91,13 @@ Table TimeSlot {
 
 Table Workshop_TimeSlot {
   Workshop_ID int [pk, ref: > Workshop.ID]
-  TimeSlot_Event_Year int [pk, ref: > TimeSlot.Event_Year]
-  TimeSlot_ID int [pk, ref: > TimeSlot.ID]
+  TimeSlot_Event_Year int [pk]
+  TimeSlot_ID int [pk]
 
   Note: 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.'
 }
+
+Ref: Workshop_TimeSlot.(TimeSlot_Event_Year, TimeSlot_ID) > TimeSlot.(Event_Year, ID)
 
 Table Room_Feature {
   Room_Name varchar(32) [pk, ref: > Room.Name]
