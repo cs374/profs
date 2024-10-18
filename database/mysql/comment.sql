@@ -12,12 +12,12 @@ ALTER TABLE `Person_Workshop` COMMENT = 'Connects a person to a workshop with a 
 
 ALTER TABLE `Workshop` COMMENT = 'Holds all the workshop information.';
 
-ALTER TABLE `Room` COMMENT = 'Rooms on campus that may be used by madiSTEM (see https://www.lib.jmu.edu/tech-classrooms/).';
+ALTER TABLE `Room` COMMENT = 'Rooms on campus that may be used by madiSTEM.';
 
 ALTER TABLE `TimeSlot` COMMENT = 'An event is divided into time slots -- these are the schedule for the day.';
 
 ALTER TABLE `Workshop_TimeSlot` COMMENT = 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.';
 
-ALTER TABLE `Room_Feature` COMMENT = 'M-N connection between room and features.';
+ALTER TABLE `Room_Feature` COMMENT = 'M-N connection between room and features (see https://www.lib.jmu.edu/tech-classrooms/).';
 
 ALTER TABLE `Feature` COMMENT = 'Just to lookup some features like sink, computers, projector, etc.';

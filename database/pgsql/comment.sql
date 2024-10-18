@@ -48,9 +48,11 @@ COMMENT ON COLUMN "Workshop"."Event_Year" IS 'Not part of the key, but required.
 
 COMMENT ON COLUMN "Workshop"."Room_Name" IS 'The room is assigned later in the process, so it can be null.';
 
-COMMENT ON TABLE "Room" IS 'Rooms on campus that may be used by madiSTEM (see https://www.lib.jmu.edu/tech-classrooms/).';
+COMMENT ON TABLE "Room" IS 'Rooms on campus that may be used by madiSTEM.';
 
 COMMENT ON COLUMN "Room"."Name" IS 'The short name of the room, like King 250';
+
+COMMENT ON COLUMN "Room"."Type" IS 'Ex: classroom, lab';
 
 COMMENT ON TABLE "TimeSlot" IS 'An event is divided into time slots -- these are the schedule for the day.';
 
@@ -60,8 +62,6 @@ COMMENT ON COLUMN "TimeSlot"."Name" IS 'Ex: registration, lunch, speaker, worksh
 
 COMMENT ON TABLE "Workshop_TimeSlot" IS 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.';
 
-COMMENT ON TABLE "Room_Feature" IS 'M-N connection between room and features.';
-
-COMMENT ON COLUMN "Room_Feature"."Notes" IS 'Ex: quantity or model of feature';
+COMMENT ON TABLE "Room_Feature" IS 'M-N connection between room and features (see https://www.lib.jmu.edu/tech-classrooms/).';
 
 COMMENT ON TABLE "Feature" IS 'Just to lookup some features like sink, computers, projector, etc.';

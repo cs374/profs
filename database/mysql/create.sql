@@ -60,9 +60,9 @@ CREATE TABLE `Workshop` (
 
 CREATE TABLE `Room` (
   `Name` varchar(32) PRIMARY KEY COMMENT 'The short name of the room, like King 250',
-  `Building` varchar(32) NOT NULL,
-  `RoomNum` int NOT NULL,
-  `Capacity` int NOT NULL
+  `Type` varchar(32) NOT NULL COMMENT 'Ex: classroom, lab',
+  `Capacity` int NOT NULL,
+  `Notes` varchar(64)
 );
 
 CREATE TABLE `TimeSlot` (
@@ -84,7 +84,6 @@ CREATE TABLE `Workshop_TimeSlot` (
 CREATE TABLE `Room_Feature` (
   `Room_Name` varchar(32),
   `Feature_Name` varchar(32),
-  `Notes` varchar(128) NOT NULL COMMENT 'Ex: quantity or model of feature',
   PRIMARY KEY (`Room_Name`, `Feature_Name`)
 );
 

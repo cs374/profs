@@ -72,11 +72,11 @@ Table Workshop {
 
 Table Room {
   Name varchar(32) [pk, note: 'The short name of the room, like King 250']
-  Building varchar(32) [not null]
-  RoomNum int [not null]
+  Type varchar(32) [not null, note: 'Ex: classroom, lab']
   Capacity int [not null]
+  Notes varchar(64)
 
-  Note: 'Rooms on campus that may be used by madiSTEM (see https://www.lib.jmu.edu/tech-classrooms/).'
+  Note: 'Rooms on campus that may be used by madiSTEM.'
 }
 
 Table TimeSlot {
@@ -102,9 +102,8 @@ Ref: Workshop_TimeSlot.(TimeSlot_Event_Year, TimeSlot_ID) > TimeSlot.(Event_Year
 Table Room_Feature {
   Room_Name varchar(32) [pk, ref: > Room.Name]
   Feature_Name varchar(32) [pk, ref: > Feature.Name]
-  Notes varchar(128) [not null, note: 'Ex: quantity or model of feature']
 
-  Note: 'M-N connection between room and features.'
+  Note: 'M-N connection between room and features (see https://www.lib.jmu.edu/tech-classrooms/).'
 }
 
 Table Feature {
