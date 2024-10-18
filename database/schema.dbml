@@ -11,7 +11,7 @@ Table Person {
   Type varchar(32) [not null, note: 'Ex: student, faculty, other']
   FirstName varchar(32) [not null]
   LastName varchar(32) [not null]
-  Phone varchar(10)
+  Phone varchar(16)
   Department_Code varchar(8) [not null, ref: > Department.Code]
 
   Note: 'The super class entity for all types of people, with their basic information.'

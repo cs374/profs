@@ -10,7 +10,7 @@ CREATE TABLE "Person" (
   "Type" varchar(32) NOT NULL,
   "FirstName" varchar(32) NOT NULL,
   "LastName" varchar(32) NOT NULL,
-  "Phone" varchar(10),
+  "Phone" varchar(16),
   "Department_Code" varchar(8) NOT NULL
 );
 
