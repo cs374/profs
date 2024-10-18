@@ -89,5 +89,5 @@ CREATE TABLE `Room_Feature` (
 
 CREATE TABLE `Feature` (
   `Name` varchar(32) PRIMARY KEY,
-  `Description` varchar(32) NOT NULL
+  `Description` varchar(128)
 );

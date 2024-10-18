@@ -108,7 +108,7 @@ Table Room_Feature {
 
 Table Feature {
   Name varchar(32) [pk]
-  Description varchar(32) [not null]
+  Description varchar(128)
 
   Note: 'Just to lookup some features like sink, computers, projector, etc.'
 }
