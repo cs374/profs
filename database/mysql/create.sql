@@ -16,7 +16,7 @@ CREATE TABLE `Person` (
 
 CREATE TABLE `Department` (
   `Code` varchar(8) PRIMARY KEY COMMENT 'Ex: CS',
-  `Name` varchar(32) NOT NULL,
+  `Name` varchar(64) NOT NULL,
   `AUHFullName` varchar(32) NOT NULL,
   `AUHEmail` varchar(32) NOT NULL,
   `College_Code` varchar(8) NOT NULL
@@ -24,7 +24,7 @@ CREATE TABLE `Department` (
 
 CREATE TABLE `College` (
   `Code` varchar(8) PRIMARY KEY COMMENT 'Ex: CISE',
-  `Name` varchar(32) NOT NULL,
+  `Name` varchar(64) NOT NULL,
   `DeanFullName` varchar(32) NOT NULL,
   `DeanEmail` varchar(32) NOT NULL,
   `DeanFirstName` varchar(32) NOT NULL
@@ -45,7 +45,7 @@ CREATE TABLE `Person_Workshop` (
 CREATE TABLE `Workshop` (
   `ID` int PRIMARY KEY AUTO_INCREMENT COMMENT 'Generated auto-increment ID because the title may be edited over time.  This ID is unique across years.',
   `State` varchar(32) NOT NULL COMMENT 'The state of the workshop -- proposed, accepted, file, etc.  The exact states are not fully defined.',
-  `Title` varchar(128) NOT NULL,
+  `Title` varchar(64) NOT NULL,
   `Advertisement` varchar(512) COMMENT 'The workshop description to be shown on the website.',
   `Description` varchar(1024) COMMENT 'The full description of the workshop maybe with much more detail than the advertisement.',
   `Capacity` int COMMENT 'The max number of students that can be accommodated in this workshop.',

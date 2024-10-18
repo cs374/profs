@@ -19,7 +19,7 @@ Table Person {
 
 Table Department {
   Code varchar(8) [pk, note: 'Ex: CS']
-  Name varchar(32) [not null]
+  Name varchar(64) [not null]
   AUHFullName varchar(32) [not null]
   AUHEmail varchar(32) [not null]
   College_Code varchar(8) [not null, ref: > College.Code]
@@ -29,7 +29,7 @@ Table Department {
 
 Table College {
   Code varchar(8) [pk, note: 'Ex: CISE']
-  Name varchar(32) [not null]
+  Name varchar(64) [not null]
   DeanFullName varchar(32) [not null]
   DeanEmail varchar(32) [not null]
   DeanFirstName varchar(32) [not null]
@@ -55,7 +55,7 @@ Table Person_Workshop {
 Table Workshop {
   ID int [pk, increment, note: 'Generated auto-increment ID because the title may be edited over time.  This ID is unique across years.']
   State varchar(32) [not null, note: 'The state of the workshop -- proposed, accepted, file, etc.  The exact states are not fully defined.']
-  Title varchar(128) [not null]
+  Title varchar(64) [not null]
   Advertisement varchar(512) [note: 'The workshop description to be shown on the website.']
   Description varchar(1024) [note: 'The full description of the workshop maybe with much more detail than the advertisement.']
   Capacity int [note: 'The max number of students that can be accommodated in this workshop.']
