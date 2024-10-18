@@ -3,7 +3,7 @@
 # Create a pgpass file in your home directory for storing the password.
 # See https://www.postgresql.org/docs/16/libpq-pgpass.html for details.
 
-export CMD='psql -q -h data.cs.jmu.edu -U profs profs'
+export CMD='psql -q -h localhost -U profs profs'
 
 echo Dropping tables...
 $CMD < drop.sql

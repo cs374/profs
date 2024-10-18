@@ -2,6 +2,7 @@
 
 import csv
 import faker
+import myloginpath
 import mysql.connector
 import random
 
@@ -9,7 +10,8 @@ import random
 def main():
 
     # Connect to the database
-    con = mysql.connector.connect(host="data.cs.jmu.edu", user="profs", database="profs")
+    cnf = myloginpath.parse("cs374")
+    con = mysql.connector.connect(**cnf, database="profs")
     cur = con.cursor()
 
     # Initialize generators

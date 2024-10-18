@@ -9,7 +9,7 @@ import random
 def main():
 
     # Connect to the database
-    con = psycopg.connect(host="data.cs.jmu.edu", user="profs", dbname="profs")
+    con = psycopg.connect(host="localhost", user="profs", dbname="profs")
     cur = con.cursor()
 
     # Initialize generators
@@ -36,7 +36,7 @@ def main():
     con.commit()
 
     # Pick three organizers
-    cur.execute('SELECT "Email" FROM "Person" WHERE `Type` = \'Faculty\' ORDER BY random() LIMIT 3')
+    cur.execute('SELECT "Email" FROM "Person" WHERE "Type" = \'Faculty\' ORDER BY random() LIMIT 3')
     for row in cur.fetchall():
         email = row[0]
         roles = fake.catch_phrase()

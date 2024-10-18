@@ -1,7 +1,7 @@
 # This script rebuilds the entire database.
 #
 # Run the following command to create the login path and store the password:
-# mysql_config_editor set --login-path=cs374 -h data.cs.jmu.edu -u profs -p
+# mysql_config_editor set --login-path=cs374 -h 127.0.0.1 -u profs -p
 
 export CMD='mysql --login-path=cs374 --local-infile profs'
 
