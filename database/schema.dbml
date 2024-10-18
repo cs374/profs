@@ -1,120 +1,120 @@
 Table MADISTEM {
-  Year INT [pk, not null, note: 'The event year']
-  Date DATE [note: 'The exact date of the event']
+  Year int [pk, not null, note: 'The event year']
+  Date date [note: 'The exact date of the event']
 
   Note: 'Holds the year and exact date of each event, for organizing.  More attributes to be added - guest speaker, theme, etc.'
 }
 
 Table ROOM {
-  ID VARCHAR(32) [pk, not null, note: 'The short name of the room, like King250']
-  Building VARCHAR(45)
-  RoomNum VARCHAR(45)
-  Capacity INT
+  ID varchar(32) [pk, not null, note: 'The short name of the room, like King250']
+  Building varchar(45)
+  RoomNum varchar(45)
+  Capacity int
 
   Note: 'Rooms on campus that may be used by madiSTEM'
 }
 
 Table WORKSHOP {
-  ID INT [pk, not null, increment, note: 'Generated auto-increment ID because the title may be edited over time.  This ID is unique across years.']
-  State VARCHAR(45) [note: 'The state of the workshop - proposed, accepted, file, etc. - the exact states are not fully defined.']
-  Title VARCHAR(128)
-  Advertisement VARCHAR(512) [note: 'The workshop description to be shown on the website.']
-  Description VARCHAR(1024) [note: 'The full description of the workshop maybe with much more detail than the advertisement.']
-  Capacity INT [note: 'The max number of students that can be accommodated in this workshop']
-  ComputerNeeds VARCHAR(128)
-  RoomNeeds VARCHAR(128)
-  MaxRepeat INT [note: 'The number of times this workshop can be offered during the day']
-  ParentQuestions VARCHAR(1024) [note: 'Follow-up information/questions for the attendee to share with their parents post event.']
-  OtherInformation VARCHAR(512) [note: 'Any other information about the workshop to be shared with the organizers.']
-  MADISTEM_Year INT [not null, note: 'Not part of the key, but required.']
-  ROOM_ID VARCHAR(32) [note: 'The room is assigned later in the process, so it can be null.']
+  ID int [pk, not null, increment, note: 'Generated auto-increment ID because the title may be edited over time.  This ID is unique across years.']
+  State varchar(45) [note: 'The state of the workshop - proposed, accepted, file, etc. - the exact states are not fully defined.']
+  Title varchar(128)
+  Advertisement varchar(512) [note: 'The workshop description to be shown on the website.']
+  Description varchar(1024) [note: 'The full description of the workshop maybe with much more detail than the advertisement.']
+  Capacity int [note: 'The max number of students that can be accommodated in this workshop']
+  ComputerNeeds varchar(128)
+  RoomNeeds varchar(128)
+  MaxRepeat int [note: 'The number of times this workshop can be offered during the day']
+  ParentQuestions varchar(1024) [note: 'Follow-up information/questions for the attendee to share with their parents post event.']
+  OtherInformation varchar(512) [note: 'Any other information about the workshop to be shared with the organizers.']
+  MADISTEM_Year int [not null, note: 'Not part of the key, but required.']
+  ROOM_ID varchar(32) [note: 'The room is assigned later in the process, so it can be null.']
 
   Note: 'Holds all the workshop information.'
 }
 
 Table COLLEGE {
-  Code VARCHAR(8) [pk, not null]
-  Name VARCHAR(45) [not null]
-  DeanFullName VARCHAR(45)
-  DeanEmail VARCHAR(45)
-  DeanFirstName VARCHAR(45)
+  Code varchar(8) [pk, not null]
+  Name varchar(45) [not null]
+  DeanFullName varchar(45)
+  DeanEmail varchar(45)
+  DeanFirstName varchar(45)
 
   Note: 'Needed for name lookups and for thank-you emails'
 }
 
 Table DEPARTMENT {
-  Code VARCHAR(8) [pk, not null, note: 'JMU department code']
-  Name VARCHAR(45) [not null]
-  AUHEmail VARCHAR(45)
-  AUHFullName VARCHAR(45)
-  COLLEGE_Code VARCHAR(8) [not null]
+  Code varchar(8) [pk, not null, note: 'JMU department code']
+  Name varchar(45) [not null]
+  AUHEmail varchar(45)
+  AUHFullName varchar(45)
+  COLLEGE_Code varchar(8) [not null]
 
   Note: 'Needed for name lookup and thank-you emails'
 }
 
 Table PERSON {
-  Email VARCHAR(45) [pk, not null, note: 'Use email as the unique identifier for all people.']
-  Type VARCHAR(45) [note: 'student, faculty, other']
-  FirstName VARCHAR(45) [not null]
-  LastName VARCHAR(45) [not null]
-  DEPARTMENT_Code VARCHAR(8)
+  Email varchar(45) [pk, not null, note: 'Use email as the unique identifier for all people.']
+  Type varchar(45) [note: 'student, faculty, other']
+  FirstName varchar(45) [not null]
+  LastName varchar(45) [not null]
+  DEPARTMENT_Code varchar(8)
 
   Note: 'The super class entity for all different types of people, with their basic information.'
 }
 
 Table ROOM_FEATURE {
-  Name INT [pk, not null]
-  Description VARCHAR(45)
+  Name int [pk, not null]
+  Description varchar(45)
 
   Note: 'Just to lookup some features like sink, computers, projector, etc.'
 }
 
 Table ROOM_has_ROOM_FEATURE {
-  ROOM_ID VARCHAR(32) [not null]
-  ROOM_FEATURE_Name INT [not null]
+  ROOM_ID varchar(32) [not null]
+  ROOM_FEATURE_Name int [not null]
 
   Note: 'M-N connection between room and room features'
 }
 
 Table VOLUNTEER {
-  PERSON_Email VARCHAR(45) [not null]
-  AssignedRole VARCHAR(45) [note: 'Various volunteer roles - need to consult Dr. Lam for details.  This is possibly multi-valued and could be promoted to part of the key.']
-  MADISTEM_Year INT [not null, note: 'Part of the key in case the same person works in different roles in different years.']
+  PERSON_Email varchar(45) [not null]
+  AssignedRole varchar(45) [note: 'Various volunteer roles - need to consult Dr. Lam for details.  This is possibly multi-valued and could be promoted to part of the key.']
+  MADISTEM_Year int [not null, note: 'Part of the key in case the same person works in different roles in different years.']
 
   Note: 'Event volunteers are managed separately from other workshop personnel, but they can be assigned to work in workshops.  These are the people usually managed by Dr.  Lam.  The madiSTEM year is part of the key as the same person may work as a volunteer in different years in different roles.'
 }
 
 Table PERSON_WORKSHOP {
-  PERSON_Email VARCHAR(45) [not null]
-  WORKSHOP_ID INT [not null]
-  Role VARCHAR(45)
-  Phone VARCHAR(10)
+  PERSON_Email varchar(45) [not null]
+  WORKSHOP_ID int [not null]
+  Role varchar(45)
+  Phone varchar(10)
 
   Note: 'Connects a person to a workshop with a specific role and contact phone number.  Since the year is in the workshop table, this relationship is M-N.'
 }
 
 Table ORGANIZER {
-  PERSON_Email VARCHAR(45) [not null]
-  Role VARCHAR(45)
-  MADISTEM_Year INT [not null]
+  PERSON_Email varchar(45) [not null]
+  Role varchar(45)
+  MADISTEM_Year int [not null]
 
   Note: 'This table just tracks the madiSTEM organizers and roles by year (like an M-N with event)'
 }
 
 Table SCHEDULE_SLOT {
-  ID INT [not null, note: 'The slots are numbered 1 - N from earliest to latest']
-  Name VARCHAR(45) [note: 'What is this slot? registration, lunch, speaker, workshops']
-  From TIME [note: 'The starting time of this time block']
-  To TIME [note: 'end time of this slot']
-  MADISTEM_Year INT [not null]
+  ID int [not null, note: 'The slots are numbered 1 - N from earliest to latest']
+  Name varchar(45) [note: 'What is this slot? registration, lunch, speaker, workshops']
+  From time [note: 'The starting time of this time block']
+  To time [note: 'end time of this slot']
+  MADISTEM_Year int [not null]
 
   Note: 'An event is divided into a schedule for the day - these are the time slots.'
 }
 
 Table WORKSHOP_in_SCHEDULE_SLOT {
-  WORKSHOP_ID INT [not null]
-  SCHEDULE_SLOT_ID INT [not null]
-  SCHEDULE_SLOT_MADISTEM_Year INT [not null]
+  WORKSHOP_ID int [not null]
+  SCHEDULE_SLOT_ID int [not null]
+  SCHEDULE_SLOT_MADISTEM_Year int [not null]
 
   Note: 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.'
 }
