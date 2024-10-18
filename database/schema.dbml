@@ -26,8 +26,8 @@ Table Workshop {
   MaxRepeat int [note: 'The number of times this workshop can be offered during the day']
   ParentQuestions varchar(1024) [note: 'Follow-up information/questions for the attendee to share with their parents post event.']
   OtherInformation varchar(512) [note: 'Any other information about the workshop to be shared with the organizers.']
-  Event_Year int [not null, note: 'Not part of the key, but required.']
-  Room_ID varchar(32) [note: 'The room is assigned later in the process, so it can be null.']
+  Event_Year int [not null, ref: > Event.Year, note: 'Not part of the key, but required.']
+  Room_ID varchar(32) [ref: > Room.ID, note: 'The room is assigned later in the process, so it can be null.']
 
   Note: 'Holds all the workshop information.'
 }
@@ -47,7 +47,7 @@ Table Department {
   Name varchar(45) [not null]
   AUHEmail varchar(45)
   AUHFullName varchar(45)
-  College_Code varchar(8) [not null]
+  College_Code varchar(8) [not null, ref: > College.Code]
 
   Note: 'Needed for name lookup and thank-you emails'
 }
@@ -57,7 +57,7 @@ Table Person {
   Type varchar(45) [note: 'student, faculty, other']
   FirstName varchar(45) [not null]
   LastName varchar(45) [not null]
-  Department_Code varchar(8)
+  Department_Code varchar(8) [ref: > Department.Code]
 
   Note: 'The super class entity for all different types of people, with their basic information.'
 }
@@ -70,23 +70,23 @@ Table Room_Feature {
 }
 
 Table Room_has_Room_Feature {
-  Room_ID varchar(32) [not null]
-  Room_Feature_Name int [not null]
+  Room_ID varchar(32) [not null, ref: > Room.ID]
+  Room_Feature_Name int [not null, ref: > Room_Feature.Name]
 
   Note: 'M-N connection between room and room features'
 }
 
 Table Volunteer {
-  Person_Email varchar(45) [not null]
+  Person_Email varchar(45) [not null, ref: > Person.Email]
   AssignedRole varchar(45) [note: 'Various volunteer roles - need to consult Dr. Lam for details.  This is possibly multi-valued and could be promoted to part of the key.']
-  Event_Year int [not null, note: 'Part of the key in case the same person works in different roles in different years.']
+  Event_Year int [not null, ref: > Event.Year, note: 'Part of the key in case the same person works in different roles in different years.']
 
   Note: 'Event volunteers are managed separately from other workshop personnel, but they can be assigned to work in workshops.  These are the people usually managed by Dr. Lam.  The madiSTEM year is part of the key as the same person may work as a volunteer in different years in different roles.'
 }
 
 Table Person_Workshop {
-  Person_Email varchar(45) [not null]
-  Workshop_ID int [not null]
+  Person_Email varchar(45) [not null, ref: > Person.Email]
+  Workshop_ID int [not null, ref: > Workshop.ID]
   Role varchar(45)
   Phone varchar(10)
 
@@ -94,9 +94,9 @@ Table Person_Workshop {
 }
 
 Table Organizer {
-  Person_Email varchar(45) [not null]
+  Person_Email varchar(45) [not null, ref: > Person.Email]
   Role varchar(45)
-  Event_Year int [not null]
+  Event_Year int [not null, ref: > Event.Year]
 
   Note: 'This table just tracks the madiSTEM organizers and roles by year (like an M-N with event)'
 }
@@ -106,45 +106,15 @@ Table Schedule_Slot {
   Name varchar(45) [note: 'What is this slot? registration, lunch, speaker, workshops']
   From time [note: 'The starting time of this time block']
   To time [note: 'end time of this slot']
-  Event_Year int [not null]
+  Event_Year int [not null, ref: > Event.Year]
 
   Note: 'An event is divided into a schedule for the day - these are the time slots.'
 }
 
 Table Workshop_in_Schedule_Slot {
-  Workshop_ID int [not null]
-  Schedule_Slot_ID int [not null]
-  Schedule_Slot_Event_Year int [not null]
+  Workshop_ID int [not null, ref: > Workshop.ID]
+  Schedule_Slot_ID int [not null, ref: > Schedule_Slot.ID]
+  Schedule_Slot_Event_Year int [not null, ref: > Schedule_Slot.Event_Year]
 
   Note: 'Connects the workshop to slot M-N, because many workshops can be scheduled in the same slot.'
 }
-
-Ref fk_Workshop_Event1:Event.Year < Workshop.Event_Year [update: no action, delete: no action]
-
-Ref fk_Workshop_Room1:Room.ID < Workshop.Room_ID [update: no action, delete: no action]
-
-Ref fk_Department_College:College.Code < Department.College_Code [update: no action, delete: no action]
-
-Ref fk_Person_Department1:Department.Code < Person.Department_Code [update: no action, delete: no action]
-
-Ref fk_Room_has_Room_Feature_Room1:Room.ID < Room_has_Room_Feature.Room_ID [update: no action, delete: no action]
-
-Ref fk_Room_has_Room_Feature_Room_Feature1:Room_Feature.Name < Room_has_Room_Feature.Room_Feature_Name [update: no action, delete: no action]
-
-Ref fk_Volunteer_Person1:Person.Email < Volunteer.Person_Email [update: no action, delete: no action]
-
-Ref fk_Volunteer_Event1:Event.Year < Volunteer.Event_Year [update: no action, delete: no action]
-
-Ref fk_Person_has_Workshop_Person1:Person.Email < Person_Workshop.Person_Email [update: no action, delete: no action]
-
-Ref fk_Person_has_Workshop_Workshop1:Workshop.ID < Person_Workshop.Workshop_ID [update: no action, delete: no action]
-
-Ref fk_Organizer_Person1:Person.Email < Organizer.Person_Email [update: no action, delete: no action]
-
-Ref fk_Organizer_Event1:Event.Year < Organizer.Event_Year [update: no action, delete: no action]
-
-Ref fk_Schedule_Slot_Event1:Event.Year < Schedule_Slot.Event_Year [update: no action, delete: no action]
-
-Ref fk_Workshop_has_Schedule_Slot_Workshop1:Workshop.ID < Workshop_in_Schedule_Slot.Workshop_ID [update: no action, delete: no action]
-
-Ref fk_Workshop_has_Schedule_Slot_Schedule_Slot1:Schedule_Slot.(ID, Event_Year) < Workshop_in_Schedule_Slot.(Schedule_Slot_ID, Schedule_Slot_Event_Year) [update: no action, delete: no action]
