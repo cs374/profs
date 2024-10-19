@@ -22,3 +22,6 @@ python generate.py
 
 echo Adding constraints...
 $CMD < alter.sql
+
+echo Creating views...
+$CMD < views.sql
