@@ -20,12 +20,12 @@ def workshop_all():
 
 @app.route("/workshops/<key>")
 def workshop_edit(key):
+
     if request.args:
-        action = request.args.get("action")
+        values = list(request.args.values())
+        action = values.pop()
         try:
             if action == "Insert":
-                values = list(request.args.values())
-                del values[13]  # action
                 db.workshop_ins(values)
                 flash("Workshop inserted")
             elif action == "Update":
@@ -36,10 +36,12 @@ def workshop_edit(key):
                 flash("Workshop deleted")
         except Exception as e:
             flash(str(e))
+            return render_template("workshop_edit.jinja", key=key, values=values)
         return redirect("/workshops")
+
     # Form was not submitted
     if key == "new":
-        data = []
+        values = []
     else:
-        data = db.workshop_get(key)
-    return render_template("workshop_edit.jinja", data=data)
+        values = db.workshop_get(key)
+    return render_template("workshop_edit.jinja", key=key, values=values)
