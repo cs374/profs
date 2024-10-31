@@ -1,19 +1,20 @@
-"""Routes for viewing/editing workshops."""
+"""Routes for viewing/editing the Workshop table."""
 
 from app import app
 import queries.workshop as db
 from flask import render_template, request, flash, redirect
 
 
-@app.route("/workshops")
+@app.route("/workshop")
 def workshop_all():
     data = db.workshop_all()
     return render_template("workshop_all.jinja", data=data)
 
 
-@app.route("/workshops/<key>")
+@app.route("/workshop/<key>")
 def workshop_edit(key):
-    # If the form was not submitted (i.e., first visit)
+
+    # If the form was not submitted
     if not request.args:
         if key == "new":
             values = []
@@ -37,4 +38,4 @@ def workshop_edit(key):
     except Exception as e:
         flash(str(e))
         return render_template("workshop_edit.jinja", key=key, values=values)
-    return redirect("/workshops")
+    return redirect("/workshop")

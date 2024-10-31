@@ -11,5 +11,5 @@ def index():
     return render_template("index.jinja")
 
 
-# Import the routes in other modules
+# Import all routes from other modules
 import routes

@@ -1,4 +1,4 @@
-"""Queries for the workshop table."""
+"""Queries for the Workshop table."""
 
 from . import DSN
 import psycopg
@@ -34,5 +34,5 @@ def workshop_del(key):
 
 
 if __name__ == "__main__":
-    print("==== First 3 Workshops ====")
+    print("==== First 3 workshops ====")
     print(workshop_all()[:3])
