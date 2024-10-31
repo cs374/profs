@@ -1,25 +1,24 @@
 """Queries for the Workshop table."""
 
-from . import DSN
-import psycopg
+from . import db_connect
 
 
 def workshop_all():
-    with psycopg.connect(DSN) as conn:
+    with db_connect() as conn:
         with conn.cursor() as cur:
             cur.execute('SELECT * FROM "Workshop"')
             return cur.fetchall()
 
 
 def workshop_get(key):
-    with psycopg.connect(DSN) as conn:
+    with db_connect() as conn:
         with conn.cursor() as cur:
             cur.execute('SELECT * FROM "Workshop" WHERE "ID" = %s', [key])
             return cur.fetchone()
 
 
 def workshop_ins(values):
-    with psycopg.connect(DSN) as conn:
+    with db_connect() as conn:
         with conn.cursor() as cur:
             cur.execute('INSERT INTO "Workshop" VALUES '
                         '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', values)
@@ -27,7 +26,7 @@ def workshop_ins(values):
 
 
 def workshop_del(key):
-    with psycopg.connect(DSN) as conn:
+    with db_connect() as conn:
         with conn.cursor() as cur:
             cur.execute('DELETE FROM "Workshop" WHERE "ID" = %s', [key])
             return cur.rowcount
