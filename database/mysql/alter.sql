@@ -1,25 +1,25 @@
-ALTER TABLE `Organizer` ADD FOREIGN KEY (`Event_Year`) REFERENCES `Event` (`Year`);
+ALTER TABLE organizer ADD FOREIGN KEY (event_year) REFERENCES event (year);
 
-ALTER TABLE `Organizer` ADD FOREIGN KEY (`Person_Email`) REFERENCES `Person` (`Email`);
+ALTER TABLE organizer ADD FOREIGN KEY (person_email) REFERENCES person (email);
 
-ALTER TABLE `Person` ADD FOREIGN KEY (`Department_Code`) REFERENCES `Department` (`Code`);
+ALTER TABLE person ADD FOREIGN KEY (department_code) REFERENCES department (code);
 
-ALTER TABLE `Department` ADD FOREIGN KEY (`College_Code`) REFERENCES `College` (`Code`);
+ALTER TABLE department ADD FOREIGN KEY (college_code) REFERENCES college (code);
 
-ALTER TABLE `Person_Workshop` ADD FOREIGN KEY (`Person_Email`) REFERENCES `Person` (`Email`);
+ALTER TABLE person_workshop ADD FOREIGN KEY (person_email) REFERENCES person (email);
 
-ALTER TABLE `Person_Workshop` ADD FOREIGN KEY (`Workshop_ID`) REFERENCES `Workshop` (`ID`);
+ALTER TABLE person_workshop ADD FOREIGN KEY (workshop_id) REFERENCES workshop (id);
 
-ALTER TABLE `Workshop` ADD FOREIGN KEY (`Event_Year`) REFERENCES `Event` (`Year`);
+ALTER TABLE workshop ADD FOREIGN KEY (event_year) REFERENCES event (year);
 
-ALTER TABLE `Workshop` ADD FOREIGN KEY (`Room_Name`) REFERENCES `Room` (`Name`);
+ALTER TABLE workshop ADD FOREIGN KEY (room_name) REFERENCES room (name);
 
-ALTER TABLE `TimeSlot` ADD FOREIGN KEY (`Event_Year`) REFERENCES `Event` (`Year`);
+ALTER TABLE timeslot ADD FOREIGN KEY (event_year) REFERENCES event (year);
 
-ALTER TABLE `Workshop_TimeSlot` ADD FOREIGN KEY (`Workshop_ID`) REFERENCES `Workshop` (`ID`);
+ALTER TABLE workshop_timeslot ADD FOREIGN KEY (workshop_id) REFERENCES workshop (id);
 
-ALTER TABLE `Workshop_TimeSlot` ADD FOREIGN KEY (`TimeSlot_Event_Year`, `TimeSlot_ID`) REFERENCES `TimeSlot` (`Event_Year`, `ID`);
+ALTER TABLE workshop_timeslot ADD FOREIGN KEY (timeslot_event_year, timeslot_id) REFERENCES timeslot (event_year, id);
 
-ALTER TABLE `Room_Feature` ADD FOREIGN KEY (`Room_Name`) REFERENCES `Room` (`Name`);
+ALTER TABLE room_feature ADD FOREIGN KEY (room_name) REFERENCES room (name);
 
-ALTER TABLE `Room_Feature` ADD FOREIGN KEY (`Feature_Name`) REFERENCES `Feature` (`Name`);
+ALTER TABLE room_feature ADD FOREIGN KEY (feature_name) REFERENCES feature (name);

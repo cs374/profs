@@ -1,4 +1,8 @@
-"""Find and replace quoted CamelCase names with lowercase."""
+r"""Find and replace quoted CamelCase names with lowercase.
+
+Usage from mysql folder: python ../lowercase.py \` *.sql
+Usage from pgsql folder: python ../lowercase.py \" *.sql
+"""
 
 import re
 import sys

@@ -1,56 +1,56 @@
 --
 -- Workshops by department/college of faculty leader
 --
-CREATE VIEW "Workshop_Department" AS
+CREATE VIEW workshop_department AS
   SELECT
-    "ID", "State", "Title",
-    "Email" AS "Leader", "FirstName", "LastName",
-    "Department_Code", "College_Code"
-  FROM "Workshop"
-    JOIN "Person_Workshop" ON "ID" = "Workshop_ID"
-    JOIN "Person" ON "Person_Email" = "Email"
-    JOIN "Department" ON "Department_Code" = "Code"
-  WHERE "Role" = 'Lead';
+    id, state, title,
+    email AS leader, first_name, last_name,
+    department_code, college_code
+  FROM workshop
+    JOIN person_workshop ON id = workshop_id
+    JOIN person ON person_email = email
+    JOIN department ON department_code = code
+  WHERE role = 'Lead';
 
 --
 -- Workshops with assigned room information
 --
-CREATE VIEW "Workshop_Room" AS
+CREATE VIEW workshop_room AS
   SELECT
-    "ID", "State", "Title",
-    "Name" AS "Room_Name", "Type" AS "Room_Type",
-    "Room"."Capacity" AS "Room_Capacity", "Features"
-  FROM "Workshop"
-    LEFT JOIN "Room" ON "Room_Name" = "Name"
+    id, state, title,
+    name AS room_name, type AS room_type,
+    room.capacity AS room_capacity, features
+  FROM workshop
+    LEFT JOIN room ON room_name = name
     LEFT JOIN (
-      SELECT "Room_Name",
-        string_agg("Feature_Name", ', ') AS "Features"
-      FROM "Room_Feature"
-      GROUP BY "Room_Name"
-    ) USING ("Room_Name");
+      SELECT room_name,
+        string_agg(feature_name, ', ') AS features
+      FROM room_feature
+      GROUP BY room_name
+    ) USING (room_name);
 
 --
 -- Number of student volunteers from each college
 --
-CREATE VIEW "Volunteer_College" AS
-  SELECT "Event_Year", "College_Code", count(*) AS "Students"
-  FROM "Workshop" w
-    JOIN "Person_Workshop" pw ON "ID" = "Workshop_ID"
-    JOIN "Person" p ON "Person_Email" = "Email"
-    JOIN "Department" d ON "Department_Code" = d."Code"
-    JOIN "College" c ON "College_Code" = c."Code"
-  WHERE "Type" = 'Student'
-  GROUP BY "Event_Year", "College_Code";
+CREATE VIEW volunteer_college AS
+  SELECT event_year, college_code, count(*) AS students
+  FROM workshop w
+    JOIN person_workshop pw ON id = workshop_id
+    JOIN person p ON person_email = email
+    JOIN department d ON department_code = d.code
+    JOIN college c ON college_code = c.code
+  WHERE type = 'Student'
+  GROUP BY event_year, college_code;
 
 --
 -- Show the detailed schedule of workshops.
 --
-CREATE VIEW "Event_Schedule" AS
+CREATE VIEW event_schedule AS
   SELECT
-    t."Event_Year", t."ID" AS "T_ID", t."BegTime", t."EndTime",
-    w."ID" AS "W_ID", w."Title", w."Advertisement"
-  FROM "TimeSlot" t
-    JOIN "Workshop_TimeSlot" wt ON t."Event_Year" = wt."TimeSlot_Event_Year"
-                               AND t."ID" = wt."TimeSlot_ID"
-   JOIN "Workshop" w ON wt."Workshop_ID" = w."ID"
-  ORDER BY t."ID", w."ID";
+    t.event_year, t.id AS t_id, t.beg_time, t.end_time,
+    w.id AS w_id, w.title, w.advertisement
+  FROM timeslot t
+    JOIN workshop_timeslot wt ON t.event_year = wt.timeslot_event_year
+                               AND t.id = wt.timeslot_id
+   JOIN workshop w ON wt.workshop_id = w.id
+  ORDER BY t.id, w.id;
