@@ -30,10 +30,10 @@ def person_edit(key):
             db.person_ins(values)
             flash("Person inserted")
         elif action == "Update":
-            flash("Update not implemented")
+            db.person_upd(key, values)
+            flash("Person updated")
         elif action == "Delete":
-            key = request.args["Email"]
-            db.workshop_del(key)
+            db.person_del(key)
             flash("Person deleted")
     except Exception as e:
         flash(str(e))

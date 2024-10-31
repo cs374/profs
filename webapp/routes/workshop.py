@@ -32,7 +32,6 @@ def workshop_edit(key):
         elif action == "Update":
             flash("Update not implemented")
         elif action == "Delete":
-            key = request.args["ID"]
             db.workshop_del(key)
             flash("Workshop deleted")
     except Exception as e:

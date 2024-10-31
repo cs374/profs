@@ -26,6 +26,15 @@ def person_ins(values):
             return cur.rowcount
 
 
+def person_upd(key, values):
+    with psycopg.connect(DSN) as conn:
+        with conn.cursor() as cur:
+            cur.execute('UPDATE "Person" SET "Email" = %s, "Type" = %s, '
+                        '"FirstName" = %s, "LastName" = %s, "Phone" = %s, '
+                        '"Department_Code" = %s WHERE "Email" = %s', values + [key])
+            return cur.rowcount
+
+
 def workshop_del(key):
     with psycopg.connect(DSN) as conn:
         with conn.cursor() as cur:
