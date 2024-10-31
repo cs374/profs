@@ -1,4 +1,4 @@
-"""Routes for viewing/editing the Person table."""
+"""Routes for viewing/editing the person table."""
 
 from app import app
 import queries.person as db
