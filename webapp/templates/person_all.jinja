@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All Workshops</title>
+    <title>All Persons</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <h1>Workshops</h1>
+    <h1>Persons</h1>
 
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
@@ -20,19 +20,12 @@
         function drawTable() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn('string', 'ID');
-            data.addColumn('string', 'State');
-            data.addColumn('string', 'Title');
-            data.addColumn('string', 'Advertisement');
-            data.addColumn('string', 'Description');
-            data.addColumn('string', 'Capacity');
-            data.addColumn('string', 'ComputerNeeds');
-            data.addColumn('string', 'RoomNeeds');
-            data.addColumn('string', 'MaxRepeat');
-            data.addColumn('string', 'ParentQuestions');
-            data.addColumn('string', 'OtherInformation');
-            data.addColumn('string', 'Event_Year');
-            data.addColumn('string', 'Room_Name');
+            data.addColumn('string', 'Email');
+            data.addColumn('string', 'Type');
+            data.addColumn('string', 'FirstName');
+            data.addColumn('string', 'LastName');
+            data.addColumn('string', 'Phone');
+            data.addColumn('string', 'Department_Code');
 
             data.addRows([
                 {% for row in data %}
@@ -41,21 +34,21 @@
             ]);
 
             var table = new google.visualization.Table(document.getElementById('table_div'));
-            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
+            table.draw(data, { showRowNumber: true, page: true, pageSize: 25 });
 
             google.visualization.events.addListener(table, "select", function() {
                 let selection = table.getSelection();
                 let item = selection[0];
                 if (item) {
-                    let id = data.getValue(item.row, 0);
-                    window.location.href = 'workshop/' + id;
+                    let email = data.getValue(item.row, 0);
+                    window.location.href = 'person/' + email;
                 }
             });
         }
     </script>
     {% endif %}
     <p>
-        <button onclick="window.location.href = 'workshop/new'">Add Workshop</button>
+        <button onclick="window.location.href = 'person/new'">Add Person</button>
     </p>
 </body>
 </html>

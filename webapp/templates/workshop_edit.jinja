@@ -63,13 +63,19 @@
             Room Name:<br>
             <input name="Room_Name" type="text" value="{{ values[12] }}">
         </p>
+
+        {% if key == "new" %}
         <p>
-            <input name="action" type="submit" value="{{ 'Insert' if key == 'new' else 'Update' }}">
+            <input name="action" type="submit" value="Insert" style="color: green;">
             <input name="action" type="submit" value="Cancel">
         </p>
+        {% else %}
         <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
             <input name="action" type="submit" value="Delete" style="color: red">
         </p>
+        {% endif %}
     </form>
 </body>
 </html>
