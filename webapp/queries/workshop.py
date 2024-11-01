@@ -22,6 +22,7 @@ def workshop_ins(values):
         with con.cursor() as cur:
             cur.execute("INSERT INTO workshop VALUES "
                         "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", values)
+            con.commit()
             return cur.rowcount
 
 
@@ -33,6 +34,7 @@ def workshop_del(key):
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("DELETE FROM workshop WHERE id = %s", [key])
+            con.commit()
             return cur.rowcount
 
 

@@ -1,0 +1,2 @@
+-- SQLite does not support "ALTER TABLE ADD" syntax, so all foreign keys
+-- need to be defined in the CREATE TABLE statements (see create.sql).

@@ -16,3 +16,6 @@ __pycache__/
 .venv/
 env/
 venv/
+
+# Generated database
+database/profs.sqlite
