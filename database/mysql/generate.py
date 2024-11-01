@@ -14,8 +14,8 @@ NUM_WORK = 20  # hands-on workshops
 NUM_SLOT = 3   # schedule time slots
 
 # Connect to the database
-cnf = myloginpath.parse("cs374")
-con = mysql.connector.connect(**cnf, database="profs")
+cnf = myloginpath.parse("profs")
+con = mysql.connector.connect(host="localhost", port="3306", **cnf, database="profs")
 cur = con.cursor()
 
 # Initialize generators

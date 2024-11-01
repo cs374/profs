@@ -13,7 +13,7 @@ NUM_WORK = 20  # hands-on workshops
 NUM_SLOT = 3   # schedule time slots
 
 # Connect to the database
-con = psycopg.connect(host="localhost", user="profs", dbname="profs")
+con = psycopg.connect(host="localhost", port="5432", user="profs", dbname="profs")
 cur = con.cursor()
 
 # Initialize generators
