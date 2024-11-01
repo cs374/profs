@@ -29,7 +29,7 @@ def person_upd(key, values):
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("UPDATE person SET email = %s, type = %s, "
-                        "firstname = %s, lastname = %s, phone = %s, "
+                        "first_name = %s, last_name = %s, phone = %s, "
                         "department_code = %s WHERE email = %s", values + [key])
             return cur.rowcount
 

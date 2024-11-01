@@ -26,7 +26,7 @@ def workshop_ins(values):
 
 
 def workshop_upd(key, values):
-    raise NotImplementedError()
+    raise NotImplementedError("workshop update not implemented")
 
 
 def workshop_del(key):
