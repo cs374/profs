@@ -51,6 +51,6 @@ CREATE VIEW event_schedule AS
     w.id AS w_id, w.title, w.advertisement
   FROM timeslot t
     JOIN workshop_timeslot wt ON t.event_year = wt.timeslot_event_year
-                               AND t.id = wt.timeslot_id
+                             AND t.id = wt.timeslot_id
    JOIN workshop w ON wt.workshop_id = w.id
   ORDER BY t.id, w.id;
