@@ -1,4 +1,4 @@
-"""Routes for viewing/editing the Workshop table."""
+"""Routes for viewing/editing the workshop table."""
 
 from app import app
 import queries.workshop as db
@@ -30,7 +30,8 @@ def workshop_edit(key):
             db.workshop_ins(values)
             flash("Workshop inserted")
         elif action == "Update":
-            flash("Update not implemented")
+            db.workshop_upd(key, values)
+            flash("Workshop updated")
         elif action == "Delete":
             db.workshop_del(key)
             flash("Workshop deleted")

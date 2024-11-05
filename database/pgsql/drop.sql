@@ -1,20 +1,20 @@
-DROP VIEW IF EXISTS "Workshop_Department";
-DROP VIEW IF EXISTS "Workshop_Room";
-DROP VIEW IF EXISTS "Volunteer_College";
-DROP VIEW IF EXISTS "Event_Schedule";
+DROP VIEW IF EXISTS workshop_department;
+DROP VIEW IF EXISTS workshop_room;
+DROP VIEW IF EXISTS volunteer_college;
+DROP VIEW IF EXISTS event_schedule;
 
-DROP TABLE IF EXISTS "Person_Workshop";
-DROP TABLE IF EXISTS "Workshop_TimeSlot";
-DROP TABLE IF EXISTS "Workshop";
-DROP TABLE IF EXISTS "TimeSlot";
+DROP TABLE IF EXISTS person_workshop;
+DROP TABLE IF EXISTS workshop_timeslot;
+DROP TABLE IF EXISTS workshop;
+DROP TABLE IF EXISTS timeslot;
 
-DROP TABLE IF EXISTS "Organizer";
-DROP TABLE IF EXISTS "Event";
+DROP TABLE IF EXISTS organizer;
+DROP TABLE IF EXISTS event;
 
-DROP TABLE IF EXISTS "Person";
-DROP TABLE IF EXISTS "Department";
-DROP TABLE IF EXISTS "College";
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS college;
 
-DROP TABLE IF EXISTS "Room_Feature";
-DROP TABLE IF EXISTS "Room";
-DROP TABLE IF EXISTS "Feature";
+DROP TABLE IF EXISTS room_feature;
+DROP TABLE IF EXISTS room;
+DROP TABLE IF EXISTS feature;

@@ -1,9 +1,9 @@
 # This script rebuilds the entire database.
 #
-# Run the following command to create the login path and store the password:
-# mysql_config_editor set --login-path=cs374 -h 127.0.0.1 -P 3306 -u profs -p
+# Run this command to create a login path for storing the password:
+# mysql_config_editor set --login-path=profs -u profs -p
 
-export CMD='mysql --login-path=cs374 --local-infile profs'
+export CMD='mysql --login-path=profs --local-infile -s -h 127.0.0.1 -P 3306 profs'
 
 echo Dropping tables...
 $CMD < drop.sql
