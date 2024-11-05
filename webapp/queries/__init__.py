@@ -30,3 +30,14 @@ if DBMS == "pgsql":
     def db_connect():
         """Connect to the database server."""
         return psycopg.connect(host=HOST, port="5432", user="profs", dbname="profs")
+
+
+if DBMS == "sqlite":
+
+    from . import _sqlite
+
+    def db_connect():
+        """Connect to the database file."""
+        con = _sqlite.CustomConnection("../database/profs.sqlite")
+        con.execute("PRAGMA foreign_keys = ON;")
+        return con
