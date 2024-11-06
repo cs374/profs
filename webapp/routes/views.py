@@ -7,7 +7,8 @@ from flask import render_template, request, flash, redirect
 
 @app.route("/workshop_department")
 def workshop_department():
-    data = db.workshop_department()
+    dept_code = "CS"
+    data = db.workshop_department(dept_code)
     return render_template("views/workshop_department.jinja", data=data)
 
 

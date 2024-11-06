@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>workshop_department</title>
+    <script type="text/javascript" src="static/dropdowns.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Workshops by department/college of faculty leader</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <select id="dept" name="dept"></select>
+    </form>
+
+</body>
+</html>
