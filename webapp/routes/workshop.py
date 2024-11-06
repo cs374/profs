@@ -8,7 +8,7 @@ from flask import render_template, request, flash, redirect
 @app.route("/workshop")
 def workshop_all():
     data = db.workshop_all()
-    return render_template("workshop_all.jinja", data=data)
+    return render_template("tables/workshop_all.jinja", data=data)
 
 
 @app.route("/workshop/<key>")
@@ -20,7 +20,7 @@ def workshop_edit(key):
             values = []
         else:
             values = db.workshop_get(key)
-        return render_template("workshop_edit.jinja", key=key, values=values)
+        return render_template("tables/workshop_edit.jinja", key=key, values=values)
 
     # Perform the requested action
     values = list(request.args.values())
@@ -37,5 +37,5 @@ def workshop_edit(key):
             flash("Workshop deleted")
     except Exception as e:
         flash(str(e))
-        return render_template("workshop_edit.jinja", key=key, values=values)
+        return render_template("tables/workshop_edit.jinja", key=key, values=values)
     return redirect("/workshop")

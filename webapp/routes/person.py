@@ -8,7 +8,7 @@ from flask import render_template, request, flash, redirect
 @app.route("/person")
 def person_all():
     data = db.person_all()
-    return render_template("person_all.jinja", data=data)
+    return render_template("tables/person_all.jinja", data=data)
 
 
 @app.route("/person/<key>")
@@ -20,7 +20,7 @@ def person_edit(key):
             values = []
         else:
             values = db.person_get(key)
-        return render_template("person_edit.jinja", key=key, values=values)
+        return render_template("tables/person_edit.jinja", key=key, values=values)
 
     # Perform the requested action
     values = list(request.args.values())
@@ -37,5 +37,5 @@ def person_edit(key):
             flash("Person deleted")
     except Exception as e:
         flash(str(e))
-        return render_template("person_edit.jinja", key=key, values=values)
+        return render_template("tables/person_edit.jinja", key=key, values=values)
     return redirect("/person")
