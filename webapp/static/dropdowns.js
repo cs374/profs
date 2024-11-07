@@ -4,7 +4,7 @@ FROM college  -- or department
 ORDER BY code
 */
 
-college = {
+const colleges = {
     "CAL": "College of Arts and Letters",
     "CHBS": "College of Health and Behavioral Studies",
     "CISE": "College of Integrated Science and Engineering",
@@ -19,7 +19,7 @@ college = {
     "UNST": "University Studies",
 }
 
-department = {
+const departments = {
     "ACENG": "Academic Engagement",
     "ACTG": "School of Accounting",
     "ADP": "Adult Degree Program",
@@ -72,4 +72,24 @@ department = {
     "SOWK": "Department of Social Work",
     "THEA": "School of Theatre and Dance – Theater",
     "WRTC": "School of Writing, Rhetoric and Technical Communication",
+}
+
+/**
+ * Populates a <select> element with one of the objects above.
+ *
+ * @param {string} id - The ID of the <select> element to populate.
+ * @param {Object} data - Key-value pairs representing each <option>.
+ * @param {string} value - The currently selected value (or "None").
+ */
+function init_select(id, data, value) {
+    const select = document.getElementById(id);
+    for (const [code, name] of Object.entries(data)) {
+        const option = document.createElement("option");
+        option.value = code;
+        option.text = code + ": " + name;
+        select.appendChild(option);
+    }
+    if (value !== "None") {
+        select.value = value;
+    }
 }

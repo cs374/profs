@@ -3,15 +3,16 @@
 from . import db_connect
 
 
-def workshop_department(dept_code):
+def workshop_department(coll_code):
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("SELECT * FROM workshop_department "
-                        "WHERE department_code = %s", [dept_code])
+                        "WHERE college_code = %s", [coll_code])
             return cur.fetchall()
 
 
 def workshop_room():
+    # TODO implement function stub
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("SELECT * FROM workshop_room")
@@ -19,6 +20,7 @@ def workshop_room():
 
 
 def volunteer_college():
+    # TODO implement function stub
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("SELECT * FROM volunteer_college")
@@ -26,6 +28,7 @@ def volunteer_college():
 
 
 def event_schedule():
+    # TODO implement function stub
     with db_connect() as con:
         with con.cursor() as cur:
             cur.execute("SELECT * FROM event_schedule")

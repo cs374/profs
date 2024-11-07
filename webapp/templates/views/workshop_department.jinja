@@ -13,8 +13,88 @@
     {% endfor %}
 
     <form>
-        <select id="dept" name="dept"></select>
+        <p>
+            <select id="coll_code" name="coll_code"></select>
+            <input type="submit">
+        </p>
     </form>
+    <script>
+        init_select("coll_code", colleges, "{{ coll_code }}");
+    </script>
+
+    {% if data %}
+    <div id="table_div"></div>
+    <div id="chart_div"></div>
+
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'ID');
+            data.addColumn('string', 'State');
+            data.addColumn('string', 'Title');
+            data.addColumn('string', 'Leader');
+            data.addColumn('string', 'First Name');
+            data.addColumn('string', 'Last Name');
+            data.addColumn('string', 'Department');
+            data.addColumn('string', 'College');
+
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                showRowNumber: true,
+                page: true,
+                pageSize: 10,
+            };
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, options);
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Department');
+            data.addColumn('number', '# of Workshops');
+
+            data.addRows([
+                {% for dept, count in stats.items() %}
+                ['{{ dept }}', {{ count }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                hAxis: {
+                    title: 'Department',
+                },
+                vAxis: {
+                    title: '# of Workshops',
+                    format: '0',
+                },
+                legend: {
+                    position: "none",
+                },
+                width: 600,
+                height: 400,
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    {% endif %}
 
 </body>
 </html>
