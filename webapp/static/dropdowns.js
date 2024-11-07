@@ -1,5 +1,5 @@
 /*
-SELECT concat(", code, ": ", name, ",) AS js
+SELECT concat('"', code, '": "', name, '",') AS js
 FROM college  -- or department
 ORDER BY code
 */
