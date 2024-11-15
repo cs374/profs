@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workshop Leader Tools</title>
+</head>
+<body>
+    <h1>Workshop Leader Tools</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+
+    <p>
+            Email: <b>{{ email }}</b><br>
+            Event Year: <b>{{ year }}</b>
+    </p>
+
+    {% if data %}
+    <form>
+        <p>
+            Title:<br>
+            <input name="title" type="text" size="80" value="{{ data[0] }}">
+        </p>
+        <p>
+            Advertisement:<br>
+        </p>
+        <textarea name="advertisement" rows="4" cols="80">{{ data[1] }}
+        </textarea>
+        <p>
+            Description:<br>
+        </p>
+        <textarea name="description" rows="10" cols="80">{{ data[2] }}
+        </textarea>
+        <p>
+            Capacity:<br>
+            <input name="capacity" type="text" value="{{ data[3] }}">
+        </p>
+        <p>
+            Computer Needs:<br>
+            <input name="computer_needs" type="text" size="80" value="{{ data[4] }}">
+        </p>
+        <p>
+            Room Needs:<br>
+            <input name="room_needs" type="text" size="80" value="{{ data[5] }}">
+        </p>
+        <p>
+            Max Repeat:<br>
+            <input name="max_repeat" type="text" value="{{ data[6] }}">
+        </p>
+        <p>
+            Parent Questions:<br>
+        </p>
+            <textarea name="parent_questions" rows="6" cols="80">{{ data[7] }}
+            </textarea>
+        <p>
+            Other Information:<br>
+        </p>
+            <textarea name="other_information" rows="4" cols="80">{{ data[8] }}
+            </textarea>
+        <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+        </p>
+    </form>
+    {% endif %}
+</body>
+</html>
