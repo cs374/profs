@@ -39,29 +39,43 @@ A link (dbms specific) is stored to the workshop, if the person is connected to 
 
 ```
 {
-    _id: string,
-    email: string,
-    type: string,
-    first_name: string,
-    last_name: string,
-    phone: string,
-    department: {
-        code: string,
-        name: string,
-        auh_name: string,
-        auh_email: string,
-        college: {
-            code: string,
-            name: string,
-            dean_name: string,
-            dean_email: string,
+    'id': 'elkadima',
+    'email': 'elkadima@jmu.edu',
+    'type': 'faculty',
+    'first_name': 'Mona',
+    'last_name': 'Rizvi',
+    'phone': '15401111111',
+    'department': {
+        'code': 'CS',
+        'name': 'Computer Science,
+        'auh_name': 'Vetria Byrd',
+        'auh_email': 'byrd@jmu.edu',
+        'college': {
+            'code': 'CISE',
+            'name': 'College of Integrated Science and Engineering',
+            'dean_name': 'Jeff Tang',
+            'dean_email': 'tang@jmu.edu',
         }
     },
     roles: [
         {
-            year: {
-                wkshopid: link,
-                role: string,
+            'year': 2024
+            'role': {
+                'role': 'organizer',
+            },
+        },
+        {
+            'year': 2024
+            'role': {
+                'workshop_id': 321    # DBMS-specific linking mechanism
+                'role': 'lead',
+            },
+        },
+        {
+            'year': 2023
+            'role': {
+                'workshop_id': 299   # DBMS-specific linking mechanism
+                'role': 'lead',
             },
         },
     ]
@@ -78,31 +92,35 @@ A link to the full Person data is not required from this direction, but may be s
 
 ```
 {
-    _id: string,
-    state: string,
-    title: string,
-    advertisement: string,
-    description: string,
-    capacity: int,
-    computer_needs: string,
-    room_needs: string,
-    max_repeat: int
-    parent_questions: string,
-    other_information: string,
-    event_year: int,
-    room_name: string,
-    timeslots: [
+    'id': 299,
+    'state': 'accepted',
+    'title': 'Create your own game!',
+    'advertisement': 'Create your own game using Scratch...',
+    'description': 'Students will use Scratch to develop a fish game...',
+    'capacity': 15,
+    'computer_needs': 'Each student needs a computer.',
+    'room_needs': 'Computer lab is best, or laptops',
+    'max_repeat': 3
+    'parent_questions': 'Ask you child to show your their game on the Scratch site.',
+    'other_information': 'N/A',
+    'event_year': 2023,
+    'room_name': 'ENGEO 2204',
+    'timeslots': [
         {
-            start: time,
-            end: time,
+            'start': '9:30',
+            'end': '10:30',
         },
+        {
+            'start': '13:20',
+            'end': '13:40',
+        }
     ]
     people: [
         {
-            name: string,
-            phone:string,
-            role: string,
-            id: link,
+            'name': 'Mona Rizvi',
+            'phone': '17571111111',
+            'role': 'lead',
+            'id': 'elkadim',    # DBMS-specific linking mechanism
         },
     ]
 }
@@ -117,13 +135,21 @@ Room is shown as an example collection below.
 
 ```
 {
-    name: string,
-    type: string,
-    capacity: int,
-    features: [
+    'name': 'ENGEO 2204',
+    'type': 'computer lab',
+    'capacity': 32,
+    'features': [
         {
-            name: string,
-            description: string,
+            'name': 'lab',
+            'description': '32 Linux Mint desktops',
+        },
+        {
+            'name': 'instructor computer',
+            'description': '1 Linux Mint desktop',
+        },
+        {
+            'name': 'projector',
+            'description': 'connection from instructor computer or HDMI',
         },
     ]
 }

@@ -20,7 +20,7 @@ if DBMS == "mysql":
 
     def db_connect():
         """Connect to the database server."""
-        return mysql.connector.connect(host=HOST, port="3307", **CNF, database="profs")
+        return mysql.connector.connect(host=HOST, port="3306", **CNF, database="profs")
 
 
 if DBMS == "pgsql":
