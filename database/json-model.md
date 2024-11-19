@@ -120,7 +120,13 @@ A link to the full Person data is not required from this direction, but may be s
             'name': 'Mona Rizvi',
             'phone': '17571111111',
             'role': 'lead',
-            'id': 'elkadim',    # DBMS-specific linking mechanism
+            'id': 'elkadima',    # DBMS-specific linking mechanism
+        },
+        {
+            'name': 'Mariya Rizvi',
+            'phone': '17572222222',
+            'role': 'volunteer',
+            'id': 'rizvi',       # DBMS-specific linking mechanism
         },
     ]
 }
@@ -163,13 +169,17 @@ The year is stored separately (and redundant), given the year is used in so many
 
 ```
 {
-    _id: string,
-    year: int,
-    date: date,
-    organizers: [
+    'id': 5,
+    'year': 2024,
+    'date': '2024-03-23',
+    'organizers': [
         {
-            person: link,
-            roles: string,
+            'person': 'lam2mo',       # DBMS-specific linking mechanism
+            'roles': ['co-chairperson', 'volunteer team'],
+        },
+        {
+            'person': 'elkadima',       # DBMS-specific linking mechanism
+            'roles': ['workshop team'],
         },
     ]
 }
